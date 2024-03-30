@@ -1,0 +1,30 @@
+﻿@model DoAnCoSo.Models.ApplicationUser
+
+<h2>Xoá Tài Khoản</h2>
+
+<p>Bạn có chắc chắn muốn xoá tài khoản này?</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <h4>Thông Tin Tài Khoản</h4>
+        <dt>Tên Tài Khoản</dt>
+        <dd>@Model.UserName</dd>
+        <dt>Email Liên Lạc</dt>
+        <dd>@Model.Email</dd>
+        <dt>Số Điện Thoại</dt>
+        <dd>@Model.PhoneNumber</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Account", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xác Nhận" class="btn btn-danger" />
+                @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+</div>

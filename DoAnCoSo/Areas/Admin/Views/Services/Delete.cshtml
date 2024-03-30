@@ -1,0 +1,56 @@
+﻿@model DoAnCoSo.Models.Services
+
+<body>
+    <h3>Bạn có chắc chắn muốn xoá dịch vụ này không?</h3>
+    <div>
+        <h4>Xoá Dịch Vụ</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Dịch Vụ
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ServiceName)
+            </dd>
+    
+            <dt>
+                Mô Tả
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                Giá Tiền
+            </dt>
+    
+            <dd>
+                <span class="price" data-price="@Model.Price"></span>
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm("Delete", "Services", new { id = Model.ServiceId }, FormMethod.Post, new { id = "deleteForm" }))
+        {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</body>
+<script>
+        // Định dạng giá tiền khi tải xong trang
+        document.addEventListener('DOMContentLoaded', function () {
+            var priceElements = document.getElementsByClassName('price');
+            for (var i = 0; i < priceElements.length; i++) {
+                var price = parseFloat(priceElements[i].getAttribute('data-price'));
+                var formattedPrice = price.toLocaleString('vi-VN') + ' VNĐ';
+                priceElements[i].textContent = formattedPrice;
+            }
+        });
+</script>
+</html>

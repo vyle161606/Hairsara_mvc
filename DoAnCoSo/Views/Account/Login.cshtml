@@ -1,0 +1,67 @@
+﻿@using DoAnCoSo.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="row body-content w-100">
+    <div class="col-md-6 d-flex justify-content-center bg-info h-100" style="margin-top: 100px">
+        <img src="~/templest/images/login_banner.svg" width="800px" alt="">
+    </div>
+
+    <div class="col-md-6 p-5 mt-5" style="left: 50px">
+        <div class="text-center" style="max-width: 550px;">
+            <h4 style="margin-top: 100px">EMBODY - Đăng nhập</h4>
+            <p>Xin chào, vui lòng nhập thông tin đăng nhập</p>
+            <div>
+                @*<section id="socialLoginForm">*@
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input class="form-control my-3 p-2 taikhoan" data-val="true"
+                           data-val-required="The UserName field is required." id="UserName" name="UserName" type="text" placeholder="Tên đăng nhập">
+
+                    <input class="form-control my-3 p-2 matkhau" data-val="true"
+                           data-val-required="The Password field is required." id="Password" name="Password" type="password" placeholder="Mật khẩu">
+                    <div class="from-control my-3 p-2">
+
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+
+                    </div>
+
+                    <a class="float-left mb-2" href="">Quên mật khẩu</a>
+
+                    <button class="btn btn-primary w-100 btn__login">Đăng nhập</button>
+
+                    <p class="float-left my-2" style="color: #ccc;">Hoặc</p>
+
+                    <button class="btn btn-outline-info w-100">
+                        <img src="~/assets/images/google.jpg" width="25" alt="">
+                        Đăng nhập với Google
+                    </button>
+                }
+            </div>
+            <div class="mt-5">
+                <p style="color: #ccc;">Chưa có tài khoản EMBODY? <a href="/Account/Register">Đăng ký ngay</a></p>
+                <div class="mb-2">
+                    <a href="/Home/Index">Quay lại trang chủ</a>
+                </div>
+
+                <div class="row m-1">
+                    <div class="" style="cursor: pointer;">
+                        <span>
+                            <img src="~/templest/images/la-co-viet-nam.png" width="25" alt=""> Tiếng Việt
+                        </span>
+                    </div>
+
+                    <div class="ml-3" style="cursor: pointer;">
+                        <span>
+                            <img src="~/templest/images/co_my.png" width="25" alt=""> English
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,292 @@
+﻿@model DoAnCoSo.Models.Appointments
+
+@{
+    ViewBag.Title = "Book Appointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style>
+    .tab {
+        display: none;
+    }
+
+    .step-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .step {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+
+        .step.current {
+            background-color: #e1e1e1;
+        }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+        .button-container button {
+            padding: 10px 20px;
+        }
+</style>
+
+<link href="/templest/css/booking.css" rel="stylesheet" />
+
+<div class="site-section">
+    <div class="slide-one-item home-slider owl-carousel">
+        <div class="site-blocks-cover inner-page-cover" style="background-image: url('/templest/images/hero_bg_2.jpg'); " data-aos="fade" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row align-items-center justify-content-center text-center">
+                    <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+                        <h2 class="text-white font-weight-light mb-2 display-1">Booking Online</h2>
+                        <p><a href="#" class="btn btn-black py-3 px-5">Book Now!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col-md-7 mb-5">
+                @using (Html.BeginForm())
+                {
+                    <h2 class="mb-4 site-section-heading">Book Now</h2>
+                    <div class="step-container">
+                        <div class="step">
+                            <h2>Chọn dịch vụ + Thợ + Ngày</h2>
+                            <div>
+                                <label for="Styles">Services:</label>
+                                @Html.DropDownListFor(m => m.ServiceId, new SelectList(ViewBag.Services, "ServiceId", "ServiceName"), "-- Select Service --", new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Services)
+                            </div>
+                            <div>
+                                <label for="Services">Barbers:</label>
+                                @Html.DropDownListFor(m => m.BarberId, new SelectList(ViewBag.Barbers, "BarberId", "BarberName"), "-- Select Barber --", new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.Barbers)
+                            </div>
+                            <div>
+                                <label for="StartDate">Date:</label>
+                                @Html.TextBoxFor(m => m.StartDate, new { @type = "date", @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.StartDate)
+                            </div>
+                        </div>
+                        <div class="step">
+                            <h2>Chọn giờ và ghế</h2>
+                            <div>
+                                <label for="StartTime">Time:</label>
+                                @Html.TextBoxFor(m => m.StartTime, new { @class = "form-control timepicker", @placeholder = "Choose a time", @onclick = "showTimePicker()", @id = "time-picker", required = "required" })
+                                @Html.ValidationMessageFor(m => m.StartTime)
+                                <div id="time-picker-container">
+                                    <div class="time-row">
+                                        @for (int i = 8; i <= 11; i++)
+                                        {
+                                            <button type="button" class="time-button" data-value="@i:00">@i:00</button>
+                                            <button type="button" class="time-button" data-value="@i:30">@i:30</button>
+                                        }
+                                    </div>
+                                    <div class="time-row">
+                                        @for (int i = 12; i <= 15; i++)
+                                        {
+                                            <button type="button" class="time-button" data-value="@i:00">@i:00</button>
+                                            <button type="button" class="time-button" data-value="@i:30">@i:30</button>
+                                        }
+                                    </div>
+                                    <div class="time-row">
+                                        @for (int i = 16; i <= 19; i++)
+                                        {
+                                            <button type="button" class="time-button" data-value="@i:00">@i:00</button>
+                                            <button type="button" class="time-button" data-value="@i:30">@i:30</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="Seat">Seat:</label>
+                                @Html.DropDownListFor(m => m.SeatId, new SelectList(ViewBag.Seats, "SeatId", "SeatNumber"), "-- Select Seat --", new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.SeatId)
+                            </div>
+
+                        </div>
+                        <div class="step">
+                            <h2>Step 3</h2>
+                            <div>
+                                <label for="Note">Note:</label>
+                                @Html.TextAreaFor(m => m.Note, new { @class = "form-control", @placeholder = "Write your notes or questions here..." })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button onclick="checkAvailability()">Kiểm tra sự khả dụng</button>
+                        <button id="prev-button" type="button">Quay lại</button>
+                        <button id="confirm-button" type="submit" style="display: block;">Xác nhận</button>
+                        <button id="next-button" type="button">Tiếp theo</button>
+                    </div>
+
+                }
+            </div>
+            <div class="col-md-5">
+                <div class="p-4 mb-3 bg-white">
+                    <p class="mb-0 font-weight-bold">Address</p>
+                    <p class="mb-4">1234 Street Name, City Name</p>
+                    <p class="mb-0 font-weight-bold">Phone</p>
+                    <p class="mb-4"><a href="#">+1 292 3232 234</a></p>
+
+                    <p class="mb-0 font-weight-bold">Email Address</p>
+                    <p class="mb-0"><a href="#">info@yourdomain.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        const steps = Array.from(document.getElementsByClassName('step'));
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const confirmButton = document.getElementById('confirm-button');
+        let currentStep = 0;
+
+        // Lưu thông tin người dùng đã nhập
+        const userData = {};
+
+        function updateButtonState() {
+            prevButton.disabled = currentStep === 0;
+            nextButton.style.display = currentStep < steps.length - 1 ? 'block' : 'none';
+            confirmButton.style.display = currentStep === steps.length - 1 ? 'block' : 'none';
+        }
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                if (index === stepIndex) {
+                    step.style.display = 'block';
+                } else {
+                    step.style.display = 'none';
+                }
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                if (areRequiredFieldsFilled()) {
+                    // Lưu thông tin người dùng đã nhập vào step 1
+                    if (currentStep === 0) {
+                        saveStep1Data();
+                    }
+
+                    currentStep++;
+                    updateButtonState();
+                    showStep(currentStep);
+                } else {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc trước khi chuyển tiếp.');
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateButtonState();
+                showStep(currentStep);
+            }
+        }
+
+        function areRequiredFieldsFilled() {
+            // Kiểm tra các trường bắt buộc trong step hiện tại
+            var requiredFields = steps[currentStep].querySelectorAll('[required]');
+            for (var i = 0; i < requiredFields.length; i++) {
+                if (!requiredFields[i].value) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function saveStep1Data() {
+            // Lưu thông tin người dùng đã nhập vào step 1
+            var serviceId = document.getElementById('ServiceId').value;
+            var barberId = document.getElementById('BarberId').value;
+            var startDate = document.getElementById('StartDate').value;
+
+            userData['ServiceId'] = serviceId;
+            userData['BarberId'] = barberId;
+            userData['StartDate'] = startDate;
+        }
+
+
+        prevButton.addEventListener('click', prevStep);
+        nextButton.addEventListener('click', nextStep);
+
+        updateButtonState();
+        showStep(currentStep);
+    </script>
+
+    <script>
+        var timePicker = document.getElementById("time-picker");
+        var timePickerContainer = document.getElementById("time-picker-container");
+        function showTimePicker() {
+            timePickerContainer.style.display = "block";
+        }
+
+        function hideTimePicker() {
+            timePickerContainer.style.display = "none";
+        }
+
+        var timeButtons = document.getElementsByClassName("time-button");
+        for (var i = 0; i < timeButtons.length; i++) {
+            timeButtons[i].addEventListener("click", function () {
+                // Remove the "selected-time" class from all buttons
+                for (var j = 0; j < timeButtons.length; j++) {
+                    timeButtons[j].classList.remove("selected-time");
+                }
+                // Add the "selected-time" class to the clicked button
+                this.classList.add("selected-time");
+                // Update the value of the time picker input with the selected time
+                timePicker.value = this.textContent;
+                // Hide the time picker container
+                hideTimePicker();
+            });
+        }
+    </script>
+    <script>
+        // Giả định bạn có dữ liệu mốc thời gian đã được đặt trước đó trong mảng timeSlots
+        const timeSlots = [
+            { barberId: 1, date: '2023-05-20', time: '09:00' },
+            { barberId: 1, date: '2023-05-20', time: '10:00' },
+            { barberId: 2, date: '2023-05-21', time: '14:00' }
+        ];
+
+        function checkAvailability(barberId, date) {
+            // Kiểm tra xem liệu có mốc thời gian đã được đặt cho BarberId và ngày được chọn hay không
+            for (var i = 0; i < timeSlots.length; i++) {
+                if (timeSlots[i].barberId === barberId && timeSlots[i].date === date) {
+                    // Mốc thời gian đã được đặt, tạo popup hiển thị mốc thời gian đó
+                    var message = 'Mốc thời gian ' + timeSlots[i].time + ' đã được đặt.';
+                    alert(message);
+                    break;
+                }
+            }
+        }
+        function checkAvailability() {
+            var barberId = document.getElementById('BarberId').value;
+            var date = document.getElementById('StartDate').value;
+            checkAvailability(barberId, date);
+        }
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkAvailabilityButton = document.getElementById('check-availability-button');
+            checkAvailabilityButton.addEventListener('click', checkAvailability);
+        });
+    </script>
+
+}

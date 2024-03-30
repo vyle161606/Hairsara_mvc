@@ -1,0 +1,117 @@
+﻿.chat-widget-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 90px;
+    width: 300px;
+    height: 430px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
+}
+
+.chat-widget-one {
+    position: fixed;
+    bottom: 20px;
+    right: 90px;
+    width: 325px;
+    height: 220px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
+}
+
+    .chat-widget-one #name-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .chat-widget-one #phone-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+.chat-widget-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-widget-body {
+    padding: 10px;
+    height: 320px;
+    overflow-y: auto;
+}
+
+.chat-widget-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+
+    .chat-widget-footer input[type="text"] {
+        width: 70%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .chat-widget-footer input[type="button"] {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+    }
+
+.chat-widget-message {
+    margin-bottom: 10px;
+}
+
+    .chat-widget-message .sender {
+        font-weight: bold;
+    }
+
+    .chat-widget-message .message-text {
+        margin-top: 5px;
+    }
+
+.chat-widget-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+﻿@model List<DoAnCoSo.Models.Message>
+
+@{
+    ViewBag.Title = "Conversation List";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Conversation List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Sent Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.Sender</td>
+                <td>@message.MessageText</td>
+                <td>@message.SentTime</td>
+                <td>
+                    @Html.ActionLink("Reply", "Reply", new { messageId = message.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

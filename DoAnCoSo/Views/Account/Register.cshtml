@@ -1,0 +1,99 @@
+﻿@model DoAnCoSo.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row body-content w-100">
+    <div class="col-md-6 d-flex justify-content-center bg-info h-100" style="margin-top: 100px">
+        <img src="~/templest/images/login_banner.svg" width="1000px" alt="">
+    </div>
+
+    <div class="col-md-6 p-5 mt-5" style="left: 100px">
+        <div class="text-center" style="max-width: 550px;">
+            <h4 style="margin-top: 100px">Hair - Đăng ký</h4>
+            <p>Xin chào, vui lòng nhập thông tin đăng ký</p>
+            <hr />
+            <div>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <input class="form-control my-3 p-2" data-val="true"
+                           data-val-required="The UserName field is required." id="UserName" name="UserName" type="text" placeholder="Tên đăng nhập">
+
+                    <input class="form-control my-3 p-2" data-val="true"
+                           data-val-required="The Password field is required." id="Password" name="Password" type="password" placeholder="Mật khẩu">
+
+                    <input class="form-control my-3 p-2" data-val="true"
+                           data-val-required="The UserName field is required." id="ConfirmPassword" name="ConfirmPassword" type="password" placeholder="Nhập lại mật khẩu">
+
+                    <input class="form-control my-3 p-2" data-val="true"
+                           data-val-required="The Password field is required." id="Email" name="Email" type="text" placeholder="Email">
+                    <input class="form-control my-3 p-2" data-val="true"
+                           data-val-required="The Password field is required." id="PhoneNumber" name="PhoneNumber" type="text" placeholder="PhoneNumber">
+
+                    <p style="color: #ccc;">
+                        Nhấn vào nút "Đăng ký", đồng nghĩa với việc bạn đồng ý với <a href="">Chính sách bảo mật</a> và <a href="">Các điều khoản dịch vụ</a> của Hair
+                    </p>
+
+                    <input type="submit" class="btn btn-primary w-100" value="Đăng Ký" />
+                }
+                <div class="mt-5">
+                    <p style="color: #ccc;">Bạn đã có tài khoản Hair? <a href="/Account/Login">Đăng nhập</a></p>
+                    <div class="mb-2">
+                        <a href="/Home/Index">Quay lại trang chủ</a>
+                    </div>
+                    <div class="row m-1">
+                        <div class="" style="cursor: pointer;">
+                            <span>
+                                <img src="~/templest/images/la-co-viet-nam.png" width="25" alt=""> Tiếng Việt
+                            </span>
+                        </div>
+
+                        <div class="ml-3" style="cursor: pointer;">
+                            <span>
+                                <img src="~/templest/images/co_my.png" width="25" alt=""> English
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

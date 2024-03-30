@@ -1,0 +1,66 @@
+﻿@model DoAnCoSo.Models.Styles
+
+<body>
+    <h3>Bạn có chắc chắn muốn xoá mẫu tóc này không?</h3>
+    <div>
+        <h4>Xoá Mẫu Tóc</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Mẫu Tóc
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StyleName)
+            </dd>
+    
+            <dt>
+                Ảnh Mẫu Tóc
+            </dt>
+    
+            <dd>
+                <div class="avatar avatar-xxl">
+                    <img src="@Url.Content("~/ListImages/Styles/" + Html.DisplayFor(modelItem => Model.Image))" alt="..." class="avatar-img rounded">
+                </div>
+            </dd>
+    
+            <dt>
+                Mô Tả
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                Giá Tiền
+            </dt>
+    
+            <dd>
+                <span class="price" data-price="@Model.Price"></span>
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm("Delete", "Styles", new { id = Model.StyleId }, FormMethod.Post, new { id = "deleteForm" }))
+        {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</body>
+<script>
+        // Định dạng giá tiền khi tải xong trang
+        document.addEventListener('DOMContentLoaded', function () {
+            var priceElements = document.getElementsByClassName('price');
+            for (var i = 0; i < priceElements.length; i++) {
+                var price = parseFloat(priceElements[i].getAttribute('data-price'));
+                var formattedPrice = price.toLocaleString('vi-VN') + ' VNĐ';
+                priceElements[i].textContent = formattedPrice;
+            }
+        });
+</script>
+</html>

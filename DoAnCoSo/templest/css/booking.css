@@ -1,0 +1,80 @@
+﻿
+/* style the previous and next buttons */
+prevTab, nextTab, submitForm {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8bc34a;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+    /* disable the previous button on the first tab */
+    .prevbutton[disabled] {
+        background-color: #ccc;
+        cursor: default;
+    }
+
+    /* change the next button to confirm on the last tab */
+    .nextbutton.confirm {
+        background-color: #4CAF50;
+    }
+
+    /* disable the next button on the last tab */
+    .nextbutton[disabled]:not(.confirm) {
+        background-color: #ccc;
+        cursor: default;
+    }
+
+/* style the container for the buttons */
+.tabbuttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#time-picker-container {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.time-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#time-picker-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+#time-picker-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+
+.time-button {
+    display: block;
+    width: 48%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+    .time-button:hover {
+        background-color: #f2f2f2;
+    }
+
+.selected-time {
+    background-color: #007bff;
+    color: #fff;
+}

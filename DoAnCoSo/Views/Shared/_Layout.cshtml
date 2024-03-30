@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ &mdash; Chào Mừng Bạn Đến Với HairSara</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
+    <link rel="stylesheet" href="/templest/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/templest/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/templest/css/magnific-popup.css">
+    <link rel="stylesheet" href="/templest/css/jquery-ui.css">
+    <link rel="stylesheet" href="/templest/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/templest/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/templest/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+    <link rel="stylesheet" href="/templest/css/aos.css">
+    <link rel="stylesheet" href="/templest/css/style.css">
+    <link href="~/templest/css/Chat.css" rel="stylesheet" />
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/templest/js/jquery.min.js"></script>
+    <script>
+        $(window).on('load', function () { $(".loader").fadeOut(2000); });
+        $(function () {
+            new WOW().init();
+        });
+    </script>
+    <style>
+        .divider {
+            text-align: center; /* căn giữa phần tử */
+            margin-top: 20px; /* khoảng cách từ top menu */
+            margin-bottom: 0px; /* khoảng cách từ phần bên dưới */
+        }
+
+            .divider hr {
+                border: none; /* loại bỏ đường viền */
+                border-top: 4px solid #00ff00; /* đường gạch chân */
+                width: 100%; /* chiều rộng của đường gạch chân */
+            }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <div class="topmenu">
+        <div class="container">
+            <div class="row" id="page-top">
+                <div class="col-md-6 col-sm-6 phone">
+                    <div><i style="margin-top: 30px" class="fa fa-phone"></i> Call Now: (+84) 1648 269 168</div>
+                </div>
+                <div class="col-md-6 col-sm-6 address">
+                    <div>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="divider">
+        <hr>
+    </div>
+    <div class="site-wrap">
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+        @*<--Header-->*@
+        <header class="site-navbar py-1" role="banner" style="margin-top: -30px">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-6 col-xl-2" data-aos="fade-down">
+                        <h1 class="mb-0"><a href="/home/index" class="text-black h2 mb-0">HairSara</a></h1>
+                    </div>
+                    <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
+                        <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
+
+                            <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
+                                <li><a href="/Home/Index">Trang Chủ</a></li>
+                                <li><a href="/Styles/Index">Mẫu Tóc</a></li>
+                                <li><a href="/Services/Index">Dịch Vụ</a></li>
+                                <li><a href="/Barbers/Index">Thợ Cắt Tóc</a></li>
+                                <li><a href="/Appointments/CreateStep1">Đặt Lịch</a></li>
+                                <li><a href="/Home/Contact">Liên Hệ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-6 col-xl-2 text-right" data-aos="fade-down">
+                        <div class="d-none d-xl-inline-block">
+                            <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
+                                <li>
+                                    <a href="#" class="pl-0 pr-3 text-black"><span class="icon-facebook"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pl-3 pr-3 text-black"><span class="icon-twitter"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pl-3 pr-3 text-black"><span class="icon-instagram"></span></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pl-3 pr-3 text-black"><span class="icon-youtube-play"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="divider" style="margin-top: -30px">
+            <hr>
+        </div>
+        @*</--Header-->*@
+        <div style="margin-top: -90px;">@RenderBody()</div>
+        @*<--Footer-->*@
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-5">
+                            <h3 class="footer-heading mb-4">Về Chúng Tôi</h3>
+                            <p>Nơi bạn có thể trải nghiệm dịch vụ chuyên nghiệp và tận hưởng một trải nghiệm cắt tóc thú vị</p>
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <h3 class="footer-heading mb-4">Quick Menu</h3>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="/Home/Index">Trang Chủ</a></li>
+                                    <li><a href="/Services/Index">Dịch Vụ</a></li>
+                                    <li><a href="/Styles/Index">Mẫu Tóc</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="/Barbers/Index">Thợ Cắt Tóc</a></li>
+                                    <li><a href="/Appointments/CreateStep1">Đặt Lịch</a></li>
+                                    <li><a href="/Home/Contact">Liên Hệ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+
+
+                        <div class="mb-5">
+                            <h3 class="footer-heading mb-2">Theo dõi bản tin</h3>
+                            <p>Nơi bạn có thể trải nghiệm dịch vụ chuyên nghiệp và tận hưởng một trải nghiệm cắt tóc thú vị.</p>
+
+                            <form action="#" method="post">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary text-white" type="button" id="button-addon2">Gửi</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row pt-5 mt-5 text-center">
+                    <div class="col-md-12">
+                        <div class="mb-5">
+                            <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                        </div>
+
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+        @*</--Footer-->*@
+    </div>
+    <div class="chat-widget-icon" id="chat-widget-icon">
+        <i class="fa fa-comment fa-2x"></i>
+    </div>
+
+    <div class="chat-widget-one" id="chat-widget-1">
+        <div class="chat-widget-header">
+            Widget 1 - Enter Name and Phone
+        </div>
+        <div class="chat-widget-body">
+            <input type="text" id="name-input" placeholder="Your Name" />
+            <input type="text" id="phone-input" placeholder="Your Phone" />
+            <div class="chat-widget-footer" style="text-align:end; padding: 5px">
+                <input type="button" id="submit-button" value="Submit" />
+                <input type="button" id="chat-widget-close-1" value="Close" />
+            </div>
+        </div>
+        <div class="chat-widget-close" id="chat-widget-close-1">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+
+    <div class="chat-widget" id="chat-widget-2">
+        <div class="chat-widget-header">
+            Widget 2 - Chat
+        </div>
+        <div class="chat-widget-body" id="chat">
+            <p class="chat-widget-message">
+                <span class="sender"> HairSara:</span>
+                <span class="message-text">Xin Chào <span id="welcome-name"></span></span>
+            </p>
+        </div>
+        <div class="chat-widget-footer">
+            <input type="text" id="message-input" placeholder="Type your message here..." />
+            <input type="button" id="send-button" value="Send" />
+        </div>
+        <div class="chat-widget-close" id="chat-widget-close-2">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+</body>
+</html>
+@*<--Script-->*@
+<script src="/templest/js/jquery-3.3.1.min.js"></script>
+<script src="/templest/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/templest/js/jquery-ui.js"></script>
+<script src="/templest/js/popper.min.js"></script>
+<script src="/templest/js/bootstrap.min.js"></script>
+<script src="/templest/js/owl.carousel.min.js"></script>
+<script src="/templest/js/jquery.stellar.min.js"></script>
+<script src="/templest/js/jquery.countdown.min.js"></script>
+<script src="/templest/js/jquery.magnific-popup.min.js"></script>
+<script src="/templest/js/aos.js"></script>
+<script src="/templest/js/main.js"></script>
+<link rel="stylesheet" href="/templest/css/bootstrap-datepicker.css">
+<script src="/templest/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="~/signalr/hubs"></script>
+<script>
+    $(function () {
+        var chat = $.connection.chatHub;
+        var chatWidgetIcon = $('#chat-widget-icon');
+        var chatWidget1 = $('#chat-widget-1');
+        var chatWidget2 = $('#chat-widget-2');
+        var chatWidgetClose1 = $('#chat-widget-close-1');
+        var chatWidgetClose2 = $('#chat-widget-close-2');
+        var nameInput = $('#name-input');
+        var phoneInput = $('#phone-input');
+        var messageInput = $('#message-input');
+        var senderName = $('.sender');
+        var welcomeName = $('#welcome-name');
+
+        chat.client.addNewMessageToPage = function (name, message) {
+            var sender = name.trim() !== "" ? name : "User";
+            var senderAvatar = "https://www.phplivesupport.com/pics/icons/avatars/public/avatar_71.png";
+
+            var messageHtml = '<p class="chat-widget-message">' +
+                '<span class="sender"><img src="' + senderAvatar + '" title="' + sender + '"></span>' +
+                '<span class="message-text">' + htmlEncode(message) + '</span>' +
+                '</p>';
+
+            $('#chat-widget-2 .chat-widget-body').append(messageHtml);
+            $('#chat-widget-2 .chat-widget-body').scrollTop($('#chat-widget-2 .chat-widget-body')[0].scrollHeight);
+        };
+
+        $('#submit-button').click(function () {
+            var name = nameInput.val();
+            var phone = phoneInput.val();
+
+            if (name && phone) {
+                chatWidget1.hide();
+                chatWidget2.show();
+                welcomeName.text(name);
+            } else {
+                alert("Please enter your name and phone.");
+                return; // Thoát khỏi sự kiện nếu thiếu thông tin
+            }
+
+        });
+
+        $('#send-button').click(function () {
+            var message = messageInput.val();
+
+            if (message) {
+                chat.server.send(nameInput.val(), message, phoneInput.val());
+                messageInput.val('').focus();
+            } else {
+                alert("Please enter a message.");
+            }
+        });
+
+
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+
+        $.connection.hub.start().done(function () {
+            chatWidgetIcon.click(function () {
+                chatWidget1.slideToggle();
+            });
+
+            chatWidgetClose1.click(function () {
+                chatWidget1.slideUp();
+            });
+
+            chatWidgetClose2.click(function () {
+                chatWidget2.slideUp();
+            });
+        });
+    });
+
+</script>
+@*</--Script-->*@
+@RenderSection("Scripts", required: false)

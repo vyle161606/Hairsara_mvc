@@ -1,0 +1,50 @@
+﻿@model DoAnCoSo.Models.Message
+
+@{
+    ViewBag.Title = "Reply";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Reply</h2>
+
+<div>
+    <strong>Sender:</strong> @Model.Sender
+</div>
+
+<div>
+    <strong>Message:</strong> @Model.MessageText
+</div>
+
+<div>
+    <strong>Sent Time:</strong> @Model.SentTime
+</div>
+
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.ReplyMessage))
+{
+    <h4>Admin Reply:</h4>
+
+    <div>
+        @Model.ReplyMessage
+    </div>
+
+    <hr />
+}
+
+<h4>Reply to @Model.Sender:</h4>
+
+@using (Html.BeginForm("Reply", "Conversation", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReplyMessage)
+        @Html.TextAreaFor(model => model.ReplyMessage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ReplyMessage)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Send Reply" class="btn btn-primary" />
+    </div>
+}

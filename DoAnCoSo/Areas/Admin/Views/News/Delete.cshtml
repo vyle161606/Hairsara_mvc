@@ -1,0 +1,66 @@
+﻿@model DoAnCoSo.Models.News
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Bạn có chắc chắn muốn xoá tin tức này không?</h3>
+    <div>
+        <h4>Xoá Tin Tức</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tiêu Đề
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                Nội Dung
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                Hình Ảnh
+            </dt>
+
+            <dd>
+                <div class="avatar avatar-xxl">
+                    <img src="@Url.Content("~/ListImages/News/" + Html.DisplayFor(modelItem => Model.Image))" alt="..." class="avatar-img rounded">
+                </div>
+            </dd>
+
+            <dt>
+                Được Tạo Vào Ngày
+            </dt>
+
+            <dd>
+                @(Model.CreateDate.HasValue ? Model.CreateDate.Value.ToString("dd/MM/yyyy") : "")
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm("Delete", "News", new { id = Model.NewId }, FormMethod.Post, new { id = "deleteForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" /> 
+            </div>
+        }
+    </div>
+</body>
+</html>

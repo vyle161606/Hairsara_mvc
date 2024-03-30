@@ -1,0 +1,240 @@
+﻿@model IEnumerable<DoAnCoSo.Models.Appointments>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<style>
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+@functions {
+    public static string GetStatusText(int status)
+    {
+        if (status == 1)
+        {
+            return "chờ xác nhận";
+        }
+        else if (status == 2)
+        {
+            return "đã xác nhận";
+        }
+        else if (status == 3)
+        {
+            return "đã hoàn thành";
+        }
+        return string.Empty;
+    }
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Quản Lý Lịch Hẹn</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin/Home/Index">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Appointments/Index">Lịch hẹn</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="add-row" class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên Tài Khoản</th>
+                                    <th>Thợ Thực Hiện</th>
+                                    <th>Dịch Vụ</th>
+                                    <th>Ghế</th>
+                                    <th>Ngày Thực Hiện</th>
+                                    <th>Vào Lúc</th>
+                                    <th>Ghi Chú</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Hoàn Thành Lúc</th>
+                                    <th style="width: 10%">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    var status = Convert.ToInt32(item.Status);
+                                <tr data-barbers-id="@item.AppointmentId">
+                                    <td>@item.UserName</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Barbers.BarberName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Services.ServiceName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Seat.SeatNumber)</td>
+                                    <td>
+                                        @{
+                                            if (item.StartDate is DateTime startDate)
+                                            {
+                                                @startDate.ToString("dd/MM/yyyy")
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.StartTime is TimeSpan startTime)
+                                            {
+                                                @startTime.ToString(@"hh\:mm")
+                                            }
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <button type="button" class="btn btn-link btn-primary btn-lg btn-edit update-status" data-appointment-id="@item.AppointmentId" data-status="@item.Status" data-toggle="tooltip" title="Xác Nhận">
+                                                <i class="icon-check"></i>
+                                                <span class="status-text" data-status="@item.Status">@GetStatusText(Convert.ToInt32(item.Status))</span>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-link btn-primary btn-lg btn-edit update-status disabled" data-appointment-id="@item.AppointmentId" data-toggle="tooltip" title="Xác Nhận">
+                                                <i class="icon-check"></i>
+                                                <span class="status-text" data-status="@item.Status">@GetStatusText(Convert.ToInt32(item.Status))</span>
+                                            </button>
+                                        }
+                                    </td>
+                                    <td class="end-time">
+                                        @(item.EndTime != null ? item.EndTime.Value.ToString("dd/MM/yyyy-HH:mm") : "")
+                                    </td>
+                                    <td>
+                                        <div class="form-button-action">
+
+                                            <button type="button" class="btn btn-link btn-success btn-lg btn-complete @((status == 3) ? "hidden" : "")" data-appointment-id="@item.AppointmentId" data-toggle="tooltip" title="Hoàn Thành">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+
+                                            <button type="button" class="btn btn-link btn-danger btn-lg btn-delete" data-toggle="modal" data-target="#deletePopup_@item.AppointmentId" data-toggle="tooltip" title="Remove">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <div id="deletePopup_@item.AppointmentId" class="modal fade" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Nội dung của trang Delete -->
+                                                        @Html.Partial("Delete", item)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#add-row').DataTable();
+        // Xử lý sự kiện click trên nút "Xác nhận"
+        $('.update-status').click(function () {
+            var statusText = $(this).find('.status-text');
+            var currentStatus = parseInt(statusText.data('status'));
+
+            // Kiểm tra trạng thái hiện tại và cập nhật văn bản trạng thái mới
+            if (currentStatus === 1) {
+                statusText.text('đã xác nhận');
+                statusText.data('status', 2);
+
+                // Vô hiệu hóa nút "Xác nhận" và xóa sự kiện click
+                $(this).addClass('disabled');
+                $(this).off('click');
+
+                // Gửi yêu cầu AJAX để cập nhật trạng thái
+                var updateButton = $(this); // Lưu tham chiếu của nút "Xác nhận" vào biến
+                $.ajax({
+                    url: '/Admin/Appointments/UpdateStatus',
+                    type: 'POST',
+                    data: { appointmentId: $(this).data('appointment-id') },
+                    success: function (response) {
+                        // Kiểm tra kết quả từ server
+                        if (response.result !== 'Success') {
+                            // Xử lý khi có lỗi từ server
+                        }
+                    },
+                    error: function () {
+                        // Xử lý khi có lỗi trong quá trình gửi yêu cầu AJAX
+                    }
+                });
+            } else if (currentStatus === 2 || currentStatus === 3) {
+                // Không thực hiện hành động nếu trạng thái là 2 hoặc 3
+                return;
+            }
+        });
+
+        $('.btn-complete').click(function () {
+            var appointmentId = $(this).data('appointment-id');
+            var completeButton = $(this); // Lưu tham chiếu của nút "Hoàn Thành" vào biến
+
+            // Gửi yêu cầu AJAX để đánh dấu hoàn thành
+            $.ajax({
+                url: '/Admin/Appointments/Complete',
+                type: 'POST',
+                data: { appointmentId: appointmentId },
+                success: function (response) {
+                    // Kiểm tra kết quả từ server
+                    if (response.result === 'Success') {
+                        // Xử lý thành công
+                        completeButton.hide(); // Ẩn nút "Hoàn Thành" sau khi đã hoàn thành
+                        completeButton.closest('tr').find('.status-text').text('đã hoàn thành'); // Cập nhật văn bản trạng thái mới
+
+                        // Cập nhật giá trị của EndTime
+                        var currentTime = new Date(); // Lấy thời gian hiện tại
+                        var formattedTime = currentTime.toLocaleString('vi-VN', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                        completeButton.closest('tr').find('.end-time').text(formattedTime);
+                    } else {
+                        // Xử lý khi có lỗi từ server
+                    }
+                },
+                error: function () {
+                    // Xử lý khi có lỗi trong quá trình gửi yêu cầu AJAX
+                }
+            });
+        });
+
+        $('.btn-complete').each(function () {
+            var status = parseInt($(this).closest('tr').find('.status-text').data('status'));
+            if (status === 3) {
+                $(this).addClass('hidden');
+            }
+        });
+    });
+</script>

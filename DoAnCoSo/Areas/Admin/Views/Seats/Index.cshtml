@@ -1,0 +1,144 @@
+﻿@model IEnumerable<DoAnCoSo.Models.Seat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Quản Lý Chỗ Ngồi</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin/Home/Index">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/Admin/Seats/Index">Chỗ Ngồi</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Thêm Chỗ Ngồi</h4>
+                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                            <i class="fa fa-plus"></i>
+                            Thêm
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Modal -->
+                    <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @Html.Partial("Create", new DoAnCoSo.Models.Seat())
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="add-row" class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Số Ghế</th>
+                                    <th>Trạng Thái</th>
+                                    <th style="width: 10%">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr data-barbers-id="@item.SeatId">
+
+                                        <td>@Html.DisplayFor(modelItem => item.SeatNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Availability)</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button" class="btn btn-link btn-primary btn-lg btn-edit" data-toggle="modal" data-target="#editPopup_@item.SeatId" data-toggle="tooltip" title="Edit Task">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-link btn-danger btn-lg btn-delete" data-toggle="modal" data-target="#deletePopup_@item.SeatId" data-toggle="tooltip" title="Remove">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <!-- Popup Chỉnh sửa -->
+                                            <div id="editPopup_@item.SeatId" class="modal fade" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Nội dung của trang Edit -->
+                                                            @Html.Partial("Edit", item)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Popup Xóa -->
+                                            <div id="deletePopup_@item.SeatId" class="modal fade" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Nội dung của trang Delete -->
+                                                            @Html.Partial("Delete", item)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $('#add-row').DataTable();
+        $(document).ready(function () {
+            $('#addRowButton').click(function () {
+                $('#add-row').dataTable().fnAddData([
+                    $("#addName").val(),
+                    $("#addPosition").val(),
+                    $("#addOffice").val(),
+                    action
+                ]);
+                $('#addRowModal').modal('hide');
+
+            });
+        });
+    </script>
+}

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<DoAnCoSo.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Quản Lý Tài Khoản</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/Admin/Home/Index">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Tài Khoản</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Thêm Tài Khoản</h4>
+                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                            <i class="fa fa-plus"></i>
+                            Thêm
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Modal -->
+                    <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h2 class="modal-title">
+                                        <span class="fw-mediumbold">
+                                            Thêm
+                                        </span>
+                                        <span class="fw-light">
+                                            Tài Khoản Người Dùng
+                                        </span>
+                                    </h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="small">Nhập Thông Tin Cho Tài Khoản Cần Thêm</p>
+                                    @Html.Partial("Create", new DoAnCoSo.Models.RegisterViewModel { RoleList = ViewBag.RoleList })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="add-row" class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Email liên lạc</th>
+                                    <th>Loại tài khoản</th>
+                                    <th style="width: 10%">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-barbers-id="@item.Id">
+                                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>
+                                            <span id="roles_@item.Id">
+                                                @foreach (var role in ViewBag.Roles[item.Id])
+                                                {
+                                                    <span data-user-id="@item.Id">@role</span>
+                                                }
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <button type="button" class="btn btn-link btn-danger btn-lg btn-delete" data-toggle="modal" data-target="#deletePopup_@item.Id" data-toggle="tooltip" title="Xoá">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <!-- Popup Xóa -->
+                                            <div id="deletePopup_@item.Id" class="modal fade" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <!-- Nội dung của trang Delete -->
+                                                            @Html.Partial("Delete", item)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $('#add-row').DataTable();
+        $(document).ready(function () {
+            $('#addRowButton').click(function () {
+                $('#add-row').dataTable().fnAddData([
+                    $("#addName").val(),
+                    $("#addPosition").val(),
+                    $("#addOffice").val(),
+                    action
+                ]);
+                $('#addRowModal').modal('hide');
+
+            });
+        });
+    </script>
+}
+
+

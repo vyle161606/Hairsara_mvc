@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+    int numberOfUsers = 0;
+    int numberOfNews = 0;
+    int numberOfServices = 0;
+    int numberOfStyles = 0;
+    int numberOfBarbers = 0;
+    int numberOfSeats = 0;
+    int numberOfRatings = 0;
+    int numberOfAppointments = 0;
+}
+
+<div class="page-inner">
+    <!-- Card -->
+    <h4 class="page-title">Trang Quản Trị</h4>
+    <div class="row">
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Account/Index';">
+            <div class="card card-stats card-primary card-round">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-users"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Tài Khoản</p>
+                                <h4 class="card-title">@ViewBag.NumberOfUsers</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/News/Index';">
+            <div class="card card-stats card-info card-round">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-interface-6"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Tin Tức</p>
+                                <h4 class="card-title">@ViewBag.NumberOfNews</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Services/Index';">
+            <div class="card card-stats card-success card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-analytics"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Dịch Vụ</p>
+                                <h4 class="card-title">@ViewBag.NumberOfServices</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Styles/Index';">
+            <div class="card card-stats card-stats card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-ruler"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Kiểu Tóc</p>
+                                <h4 class="card-title">@ViewBag.NumberOfStyles</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Barbers/Index';">
+            <div class="card card-stats card-danger card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Thợ Cắt Tóc</p>
+                                <h4 class="card-title">@ViewBag.NumberOfBarbers</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Seats/Index';">
+            <div class="card card-stats card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Chỗ ngồi</p>
+                                <h4 class="card-title">@ViewBag.NumberOfSeats</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Ratings/Index';">
+            <div class="card card-stats card-success card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-user-2"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Đánh Giá</p>
+                                <h4 class="card-title">@ViewBag.NumberOfRatings</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3" onclick="window.location.href = '/Admin/Appointments/Index';">
+            <div class="card card-stats card-secondary card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="flaticon-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Lịch Hẹn</p>
+                                <h4 class="card-title">@ViewBag.NumberOfAppointments</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card With Icon States Color -->
+</div>

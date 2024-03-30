@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Confirmation";
+    bool appointmentSuccess = TempData["AppointmentSuccess"] != null && (bool)TempData["AppointmentSuccess"];
+}
+
+<h2>
+    Appointment Booked @if (appointmentSuccess)
+    {<text>Successfully</text>}
+</h2>
+@if (appointmentSuccess)
+{
+    <p>Thank you for booking an appointment. Your appointment has been successfully booked.</p>
+}
+@if (ViewBag.AppointmentSuccess != null && ViewBag.AppointmentSuccess)
+{
+    <script>
+        alert('Đặt lịch cắt tóc thành công!');
+    </script>
+}

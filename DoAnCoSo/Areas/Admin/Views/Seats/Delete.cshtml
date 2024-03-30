@@ -1,0 +1,37 @@
+﻿@model DoAnCoSo.Models.Seat
+
+
+<body>
+    <h3>Bạn có chắc chắn muốn xoá chỗ ngồi?</h3>
+    <div>
+        <h4>Xoá Ghế</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+               Số Ghế
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SeatNumber)
+            </dd>
+    
+            <dt>
+                Trạng Thái
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Availability)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm("Delete", "Seats", new { id = Model.SeatId }, FormMethod.Post, new { id = "deleteForm" })) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</body>
+</html>

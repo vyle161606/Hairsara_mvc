@@ -1,0 +1,108 @@
+﻿@model DoAnCoSo.Models.Appointments
+
+@{
+    ViewBag.Title = "Book Appointment";
+    var appointmentStep1 = (DoAnCoSo.Models.Appointments)ViewBag.AppointmentStep1;
+    var appointmentStep2 = (DoAnCoSo.Models.Appointments)ViewBag.AppointmentStep2;
+}
+<link href="/templest/css/booking.css" rel="stylesheet" />
+<style>
+    /* CSS cho phần tử strong */
+    strong {
+        color: #00ff21; /* Màu chữ đỏ */
+        font-weight: bold; /* Chữ đậm */
+        font-size: 18px; /* Cỡ chữ 18px */
+    }
+
+    .step-container1 {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        width: 470px;
+        height: 240px;
+    }
+
+    .confirm-button {
+        position: absolute; /* Đặt vị trí tuyệt đối */
+        right: 10px; /* Căn phải 10px */
+        bottom: 10px; /* Căn dưới 10px */
+    }
+</style>
+<div class="col-md-7 mb-5">
+    <h2 style="width: 470px; height: 60px; font-size: 2.5rem;">Kiểm tra lại thông tin</h2>
+    <div class="step-container1">
+        <div>
+            <strong>Dịch Vụ:</strong> @ViewBag.ServiceName
+        </div>
+        <div>
+            <strong>Thợ Cắt Tóc:</strong> @ViewBag.BarberName
+        </div>
+        <div>
+            <strong>Ngày Đặt:</strong> @ViewBag.StartDate
+        </div>
+        <div>
+            <strong>Vào Lúc:</strong> @(appointmentStep2.StartTime.HasValue ? appointmentStep2.StartTime.Value.ToString("hh\\:mm") : "")
+        </div>
+        <div>
+            <strong>Số ghế:</strong> @ViewBag.SeatNumber
+        </div>
+        <div>
+            <strong>Ghi Chú:</strong> @ViewBag.Note
+        </div>
+
+    </div>
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" placeholder="Enter your email">
+    </div>
+
+</div>
+@using (Html.BeginForm("CreateStep3Post", "Appointments", FormMethod.Post, new { id = "appointmentForm" }))
+{
+    <input type="submit" value="Hoàn Thành" class="confirm-button" onclick="submitForm()" />
+}
+<script>
+    document.getElementById('appointmentForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của form submit
+
+        // Gửi form dữ liệu lên action "CreateStep3Post"
+        fetch('/Appointments/CreateStep3Post', {
+            method: 'POST',
+            body: new FormData(document.getElementById('appointmentForm'))
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Lưu dữ liệu thành công, hiển thị thông báo và chuyển hướng trang
+                    alert('Đặt lịch thành công');
+                    window.location.href = '/Home/Index';
+                } else {
+                    // Xử lý lỗi khi lưu dữ liệu không thành công
+                    // ...
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+</script>
+<script>
+    function submitForm() {
+        var email = document.getElementById('Email').value;
+
+        // Gửi AJAX request
+        $.ajax({
+            url: '/Appointments/CreateStep3Post',
+            type: 'POST',
+            data: { email: email },
+            success: function (response) {
+                // Xử lý kết quả thành công
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi
+            }
+        });
+    }
+</script>
+

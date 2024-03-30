@@ -1,0 +1,48 @@
+﻿@model DoAnCoSo.Models.Barbers
+
+
+<h3>Bạn có chắc chắn muốn xoá thợ cắt tóc không?</h3>
+<div>
+    <h4>Xoá Thợ Cắt Tóc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Thợ Cắt Tóc
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarberName)
+        </dd>
+
+        <dt>
+            Ảnh Thợ Cắt Tóc
+        </dt>
+
+        <dd>           
+            <div class="avatar avatar-xxl">
+            <img src="@Url.Content("~/ListImages/Barbers/" + Html.DisplayFor(modelItem => Model.Image))" alt="..." class="avatar-img rounded">
+            </div>            
+        </dd>
+
+        <dt>
+            Mô Tả Thợ Cắt Tóc
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm("Delete", "Barbers", new { id = Model.BarberId }, FormMethod.Post, new { id = "deleteForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-success" id="alert_demo_7">Xoá</button>
+        </div>
+    }
+
+
+
+
+</div>

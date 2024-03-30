@@ -1,0 +1,98 @@
+﻿@model DoAnCoSo.Models.Appointments
+
+<body>
+    <h3>Bạn có chắc chắn muốn xoá lịch hẹn?</h3>
+    <div>
+        <h4>Thông tin lịch hẹn</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Thợ Thực Hiện
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Barbers.BarberName)
+            </dd>
+
+            <dt>
+                Dịch Vụ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Services.ServiceName)
+            </dd>
+
+            <dt>
+                Khách Hàng
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                Ngày Hẹn
+            </dt>
+
+            <dd>
+                @(Model.StartDate.HasValue ? Model.StartDate.Value.ToString("dd/MM/yyyy") : "")
+            </dd>
+
+
+            <dt>
+                Giờ Hẹn
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartTime)
+            </dd>
+
+            <dt>
+                Hoàn Thành Lúc
+            </dt>
+
+            <dd>
+                @(Model.EndTime.HasValue ? Model.EndTime.Value.ToString("dd/MM/yyyy-HH:mm") : "")
+            </dd>
+
+
+            <dt>
+                Trạng Thái
+            </dt>
+
+            <dd>
+                @if (Model.Status == 1)
+                {
+                    <text>chờ xác nhận</text>
+                }
+                else if (Model.Status == 2)
+                {
+                    <text>đã xác nhận</text>
+                }
+                else if (Model.Status == 3)
+                {
+                    <text>đã hoàn thành</text>
+                }
+            </dd>
+
+
+            <dt>
+                Ghi Chú
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Note)
+            </dd>
+
+        </dl>
+    
+        @using (Html.BeginForm("Delete", "Appointments", new { id = Model.AppointmentId }, FormMethod.Post, new { id = "deleteForm" })) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</body>
+</html>

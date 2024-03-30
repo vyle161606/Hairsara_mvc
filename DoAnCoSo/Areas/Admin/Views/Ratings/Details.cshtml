@@ -1,0 +1,58 @@
+﻿@model DoAnCoSo.Models.Ratings
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Ratings</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointments.UserId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Appointments.UserId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RateScore)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RateScore)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comment)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comment)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RateId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
